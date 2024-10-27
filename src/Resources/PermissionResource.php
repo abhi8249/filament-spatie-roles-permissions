@@ -128,7 +128,7 @@ class PermissionResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('models')
-                    ->label('Models')
+                    ->label(__('filament-spatie-roles-permissions::filament-spatie.field.models'))
                     ->multiple()
                     ->options(function () {
                         $commands = new \Althinect\FilamentSpatieRolesPermissions\Commands\Permission();
@@ -170,6 +170,7 @@ class PermissionResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
                 BulkAction::make('Attach to roles')
+                    ->label(__('filament-spatie-roles-permissions::filament-spatie.action.attach_to_roles'))
                     ->action(function (Collection $records, array $data): void {
                         Role::whereIn('id', $data['roles'])->each(function (Role $role) use ($records): void {
                             $records->each(fn (Permission $permission) => $role->givePermissionTo($permission));
