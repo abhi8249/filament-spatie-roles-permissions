@@ -28,7 +28,10 @@ use Spatie\Permission\Models\Role;
 
 class PermissionResource extends Resource
 {
-    protected static bool $isScopedToTenant = false;
+    public static function isScopedToTenant(): bool
+    {
+        return config('filament-spatie-roles-permissions.scope_to_tenant', true);
+    }   
 
     public static function getNavigationIcon(): ?string
     {
